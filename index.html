@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Hours Calculator with Buffer and Minutes</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h2>Work Hours Calculator with Buffer and Minutes</h2>
+    <div id="form">
+        <label for="hoursWorked">Hours Worked This Week:</label>
+        <input type="number" id="hoursWorked" min="0" max="59" step="1" required> Hours
+        <input type="number" id="minutesWorked" min="0" max="59" step="1" required> Minutes
+        
+        <label for="startTime">Today's Start Time (24-hour):</label>
+        <input type="time" id="startTime" required>
+        
+        <fieldset>
+            <legend>Add Buffer?</legend>
+            <label><input type="radio" name="buffer" value="yes"> Yes, add 5 minutes buffer</label>
+            <label><input type="radio" name="buffer" value="no" checked> No buffer</label>
+        </fieldset>
+        
+        <button onclick="calculateClockOutTime()">Calculate Clock Out Time</button>
+    </div>
+    <div id="result"></div>
+    
+    <script src="script.js"></script>
+</body>
+</html>

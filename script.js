@@ -1,15 +1,17 @@
 function calculateClockOutTime() {
     const maxHoursPerWeek = 60;
     const hoursWorked = parseFloat(document.getElementById('hoursWorked').value);
+    const minutesWorked = parseFloat(document.getElementById('minutesWorked').value) / 60;
+    const totalHoursWorked = hoursWorked + minutesWorked;
     const startTime = document.getElementById('startTime').value;
     const addBuffer = document.querySelector('input[name="buffer"]:checked').value;
 
-    if (isNaN(hoursWorked) || !startTime) {
+    if (isNaN(totalHoursWorked) || !startTime) {
         alert('Please enter valid values.');
         return;
     }
 
-    const hoursLeft = maxHoursPerWeek - hoursWorked;
+    const hoursLeft = maxHoursPerWeek - totalHoursWorked;
     if (hoursLeft <= 0) {
         document.getElementById('result').innerText = 'You have already reached or exceeded the 60-hour limit.';
         return;
