@@ -7,24 +7,32 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Work Hours Calculator with Buffer and Minutes</h2>
-    <div id="form">
-        <label for="hoursWorked">Hours Worked This Week:</label>
-        <input type="number" id="hoursWorked" min="0" max="59" step="1" required> Hours
-        <input type="number" id="minutesWorked" min="0" max="59" step="1" required> Minutes
+    <div class="container">
+        <h2>Work Hours Calculator</h2>
+        <div class="form-group">
+            <label for="hoursWorked">Hours Worked This Week:</label>
+            <div class="input-group">
+                <input type="number" id="hoursWorked" min="0" max="59" step="1" required> Hours
+                <input type="number" id="minutesWorked" min="0" max="59" step="1" required> Minutes
+            </div>
+        </div>
         
-        <label for="startTime">Today's Start Time (24-hour):</label>
-        <input type="time" id="startTime" required>
+        <div class="form-group">
+            <label for="startTime">Today's Start Time (24-hour):</label>
+            <input type="time" id="startTime" required>
+        </div>
         
-        <fieldset>
-            <legend>Add Buffer?</legend>
-            <label><input type="radio" name="buffer" value="yes"> Yes, add 5 minutes buffer</label>
-            <label><input type="radio" name="buffer" value="no" checked> No buffer</label>
-        </fieldset>
+        <div class="form-group buffer">
+            <fieldset>
+                <legend>Add Buffer?</legend>
+                <label><input type="radio" name="buffer" value="yes"> Yes, add 5 minutes buffer</label>
+                <label><input type="radio" name="buffer" value="no" checked> No buffer</label>
+            </fieldset>
+        </div>
         
         <button onclick="calculateClockOutTime()">Calculate Clock Out Time</button>
+        <div id="result"></div>
     </div>
-    <div id="result"></div>
     
     <script src="script.js"></script>
 </body>
