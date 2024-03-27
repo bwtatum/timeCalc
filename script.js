@@ -1,9 +1,23 @@
 function calculateClockOutTime() {
     const maxHoursPerWeek = 60;
-    const hoursWorked = parseFloat(document.getElementById('hoursWorked').value);
+    let inputHours = document.getElementById('hoursWorked').value;
     const startTime = document.getElementById('startTime').value;
     const addBuffer = document.querySelector('input[name="buffer"]:checked').value;
     const addLunchBreak = document.getElementById('lunchBreak').checked;
+
+    // Interpret the inputHours based on the input format
+    let hoursWorked = 0;
+    if (inputHours.includes('h') || inputHours.includes('m')) {
+        // Assume format is something like "55h 30m"
+        const hoursMatch = inputHours.match(/(\d+)h/);
+        const minsMatch = inputHours.match(/(\d+)m/);
+        const hours = hoursMatch ? parseFloat(hoursMatch[1]) : 0;
+        const mins = minsMatch ? parseFloat(minsMatch[1]) / 60 : 0;
+        hoursWorked = hours + mins;
+    } else {
+        // Assume format is decimal
+        hoursWorked = parseFloat(inputHours);
+    }
 
     if (isNaN(hoursWorked) || !startTime) {
         alert('Please enter valid values.');
@@ -23,18 +37,6 @@ function calculateClockOutTime() {
     const endTime = new Date();
     endTime.setHours(startHour, startMinute + (hoursLeft * 60), 0);
 
-    // If lunch break is selected, add 30 minutes to the end time
+    // If lunch break is selected, add 30 minutes
     if (addLunchBreak) {
-        endTime.setMinutes(endTime.getMinutes() + 30);
-    }
-
-    // If buffer is selected, subtract 5 minutes
-    if (addBuffer === 'yes') {
-        endTime.setMinutes(endTime.getMinutes() - 5);
-    }
-
-    const endHour = endTime.getHours().toString().padStart(2, '0');
-    const endMinute = endTime.getMinutes().toString().padStart(2, '0');
-
-    document.getElementById('result').innerText = `You should clock out by ${endHour}:${endMinute} to not exceed 60 hours, including your lunch break and buffer time.`;
-}
+        endTime
