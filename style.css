@@ -46,9 +46,6 @@ body {
     transition: transform 0.3s ease;
 }
 
-.container:hover {
-    transform: translateY(-5px);
-}
 
 h2 {
     color: var(--text-color);
