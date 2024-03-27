@@ -1,42 +1,61 @@
 function calculateClockOutTime() {
     const maxHoursPerWeek = 60;
-    let inputHours = document.getElementById('hoursWorked').value;
+    let inputHours = document.getElementById('hoursWorked').value.trim();
     const startTime = document.getElementById('startTime').value;
-    const addBuffer = document.querySelector('input[name="buffer"]:checked').value;
+    const addBuffer = document.querySelector('input[name="buffer"]:checked').value === 'yes';
     const addLunchBreak = document.getElementById('lunchBreak').checked;
 
-    // Interpret the inputHours based on the input format
-    let hoursWorked = 0;
-    if (inputHours.includes('h') || inputHours.includes('m')) {
-        // Assume format is something like "55h 30m"
-        const hoursMatch = inputHours.match(/(\d+)h/);
-        const minsMatch = inputHours.match(/(\d+)m/);
-        const hours = hoursMatch ? parseFloat(hoursMatch[1]) : 0;
-        const mins = minsMatch ? parseFloat(minsMatch[1]) / 60 : 0;
-        hoursWorked = hours + mins;
-    } else {
-        // Assume format is decimal
-        hoursWorked = parseFloat(inputHours);
+    // Function to parse input hours
+    function parseInputHours(input) {
+        let hours = 0;
+        // Check if input is in decimal format
+        if (/^\d+(\.\d+)?$/.test(input)) {
+            return parseFloat(input);
+        }
+        // Check for "hrs mins" format and extract hours and minutes
+        const hoursMatch = input.match(/(\d+)\s*h/);
+        const minsMatch = input.match(/(\d+)\s*m/);
+        if (hoursMatch) {
+            hours += parseInt(hoursMatch[1], 10);
+        }
+        if (minsMatch) {
+            hours += parseInt(minsMatch[1], 10) / 60;
+        }
+        return hours;
     }
 
+    let hoursWorked = parseInputHours(inputHours);
+
     if (isNaN(hoursWorked) || !startTime) {
-        alert('Please enter valid values.');
+        alert('Please ensure all inputs are filled correctly.');
         return;
     }
 
-    const hoursLeft = maxHoursPerWeek - hoursWorked;
+    let hoursLeft = maxHoursPerWeek - hoursWorked;
     if (hoursLeft <= 0) {
         document.getElementById('result').innerText = 'You have already reached or exceeded the 60-hour limit.';
         return;
     }
 
-    const startTimeParts = startTime.split(':');
-    const startHour = parseInt(startTimeParts[0], 10);
-    const startMinute = parseInt(startTimeParts[1], 10);
+    // Parse start time
+    const [startHour, startMinute] = startTime.split(':').map(num => parseInt(num, 10));
+    let endTime = new Date();
+    endTime.setHours(startHour, startMinute, 0, 0);
+    endTime.setMinutes(endTime.getMinutes() + (hoursLeft * 60));
 
-    const endTime = new Date();
-    endTime.setHours(startHour, startMinute + (hoursLeft * 60), 0);
-
-    // If lunch break is selected, add 30 minutes
+    // Adjust for lunch break
     if (addLunchBreak) {
-        endTime
+        endTime.setMinutes(endTime.getMinutes() + 30);
+    }
+
+    // Adjust for buffer time
+    if (addBuffer) {
+        endTime.setMinutes(endTime.getMinutes() - 5);
+    }
+
+    // Format end time
+    const endHourFormatted = endTime.getHours().toString().padStart(2, '0');
+    const endMinuteFormatted = endTime.getMinutes().toString().padStart(2, '0');
+
+    document.getElementById('result').innerText = `You should clock out by ${endHourFormatted}:${endMinuteFormatted} to not exceed 60 hours, including lunch and buffer time.`;
+}
