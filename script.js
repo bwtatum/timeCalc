@@ -1,3 +1,11 @@
+document.getElementById('darkModeToggle').addEventListener('change', function(event){
+    if(event.target.checked) {
+        document.body.setAttribute('data-theme', 'dark');
+    } else {
+        document.body.setAttribute('data-theme', 'light');
+    }
+});
+
 function calculateClockOutTime() {
     const maxHoursPerWeek = 60;
     let inputHours = document.getElementById('hoursWorked').value.trim();
