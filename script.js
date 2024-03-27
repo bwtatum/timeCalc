@@ -1,11 +1,21 @@
-document.getElementById('darkModeToggle').addEventListener('change', function(event){
-    if(event.target.checked) {
-        document.body.setAttribute('data-theme', 'dark');
-    } else {
-        document.body.setAttribute('data-theme', 'light');
+// Function to parse input hours
+function parseInputHours(input) {
+    let hours = 0;
+    if (/^\d+(\.\d+)?$/.test(input)) {
+        return parseFloat(input);
     }
-});
+    const hoursMatch = input.match(/(\d+)\s*h/);
+    const minsMatch = input.match(/(\d+)\s*m/);
+    if (hoursMatch) {
+        hours += parseInt(hoursMatch[1], 10);
+    }
+    if (minsMatch) {
+        hours += parseInt(minsMatch[1], 10) / 60;
+    }
+    return hours;
+}
 
+// Main function to calculate clock-out time
 function calculateClockOutTime() {
     const maxHoursPerWeek = 60;
     let inputHours = document.getElementById('hoursWorked').value.trim();
@@ -26,44 +36,30 @@ function calculateClockOutTime() {
         return;
     }
 
-    // Parse start time
     const [startHour, startMinute] = startTime.split(':').map(num => parseInt(num, 10));
     let endTime = new Date();
     endTime.setHours(startHour, startMinute, 0, 0);
     endTime.setMinutes(endTime.getMinutes() + (hoursLeft * 60));
 
-    // Adjust for lunch break
     if (addLunchBreak) {
         endTime.setMinutes(endTime.getMinutes() + 30);
     }
 
-    // Adjust for buffer time
     if (addBuffer) {
         endTime.setMinutes(endTime.getMinutes() - 5);
     }
 
-    // Format end time
     const endHourFormatted = endTime.getHours().toString().padStart(2, '0');
     const endMinuteFormatted = endTime.getMinutes().toString().padStart(2, '0');
 
     document.getElementById('result').innerText = `You should clock out by ${endHourFormatted}:${endMinuteFormatted} to not exceed 60 hours, including lunch and buffer time.`;
 }
 
-// Function to parse input hours
-function parseInputHours(input) {
-    let hours = 0;
-    // Check if input is in decimal format
-    if (/^\d+(\.\d+)?$/.test(input)) {
-        return parseFloat(input);
+// Dark Mode Toggle
+document.getElementById('darkModeToggle').addEventListener('change', function(event){
+    if(event.target.checked) {
+        document.body.setAttribute('data-theme', 'dark');
+    } else {
+        document.body.setAttribute('data-theme', 'light');
     }
-    // Check for "hrs mins" format and extract hours and minutes
-    const hoursMatch = input.match(/(\d+)\s*h/);
-    const minsMatch = input.match(/(\d+)\s*m/);
-    if (hoursMatch) {
-        hours += parseInt(hoursMatch[1], 10);
-    }
-    if (minsMatch) {
-        hours += parseInt(minsMatch[1], 10) / 60;
-    }
-    return hours;
-}
+});
