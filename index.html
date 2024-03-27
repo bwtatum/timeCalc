@@ -9,9 +9,10 @@
 <body>
     <div class="container">
         <h2><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Tatum's Time Calculator</h2>
+        
         <div class="form-group">
             <label for="hoursWorked">Hours Worked This Week:</label>
-            <input type="text" id="hoursWorked" placeholder="e.g., 55.5 or 55h 30m" required> 
+            <input type="text" id="hoursWorked" placeholder="e.g., 55.5 or 55h 30m" required>
         </div>
         
         <div class="form-group">
@@ -19,15 +20,12 @@
             <input type="time" id="startTime" required>
         </div>
         
-        <div class="form-group">
-            <label><input type="checkbox" id="lunchBreak"> Add 30-minute lunch break (not counted in work hours)</label>
-        </div>
-        
-        <div class="form-group buffer">
+        <!-- Grouped Options -->
+        <div class="form-group options">
             <fieldset>
-                <legend>Add Buffer?</legend>
-                <label><input type="radio" name="buffer" value="yes"> Yes, add 5 minutes buffer</label>
-                <label><input type="radio" name="buffer" value="no" checked> No buffer</label>
+                <legend>Options:</legend>
+                <label><input type="checkbox" id="lunchBreak"> Add 30-minute lunch break (not counted in work hours)</label>
+                <label><input type="checkbox" id="addBuffer"> Add 5-minute buffer</label>
             </fieldset>
         </div>
         
