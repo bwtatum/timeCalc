@@ -1,9 +1,11 @@
 // Function to parse input hours
 function parseInputHours(input) {
     let hours = 0;
+    // Check if input is in decimal format
     if (/^\d+(\.\d+)?$/.test(input)) {
         return parseFloat(input);
     }
+    // Check for "hrs mins" format and extract hours and minutes
     const hoursMatch = input.match(/(\d+)\s*h/);
     const minsMatch = input.match(/(\d+)\s*m/);
     if (hoursMatch) {
