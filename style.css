@@ -5,27 +5,35 @@
     --text-color-dark: #f5f5f5;
 }
 
-body[data-theme="dark"] {
-    --background-color: var(--background-color-dark);
-    --text-color: var(--text-color-dark);
-}
-
-body[data-theme="light"] {
-    --background-color: var(--background-color-light);
-    --text-color: var(--text-color-light);
-}
-
 body {
-    background-color: var(--background-color, #f5f5f5);
-    color: var(--text-color, #333);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: var(--background-color-light);
+    color: var(--text-color-light);
+    transition: background-color 0.3s, color 0.3s;
 }
 
-/* Style for the dark mode toggle */
+[data-theme="dark"] {
+    --background-color-light: var(--background-color-dark);
+    --text-color-light: var(--text-color-dark);
+}
+
+.container {
+    max-width: 500px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    margin-top: 20px;
+}
+
+/* Rest of your styles... */
+
 .theme-switch-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin: 20px 0;
+    margin: 20px;
 }
 
 .theme-switch {
