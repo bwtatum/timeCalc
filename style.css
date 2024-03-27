@@ -1,92 +1,78 @@
+:root {
+    --background-color-light: #f5f5f5;
+    --text-color-light: #333;
+    --background-color-dark: #333;
+    --text-color-dark: #f5f5f5;
+}
+
+body[data-theme="dark"] {
+    --background-color: var(--background-color-dark);
+    --text-color: var(--text-color-dark);
+}
+
+body[data-theme="light"] {
+    --background-color: var(--background-color-light);
+    --text-color: var(--text-color-light);
+}
+
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background: linear-gradient(135deg, #6e8efb, #a777e3);
-    color: #333;
-    margin: 0;
-    padding: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+    background-color: var(--background-color, #f5f5f5);
+    color: var(--text-color, #333);
 }
 
-.container {
-    max-width: 500px;
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-}
-
-.container:hover {
-    transform: translateY(-5px);
-}
-
-h2 {
-    color: #333;
-    text-align: center;
+/* Style for the dark mode toggle */
+.theme-switch-wrapper {
     display: flex;
     align-items: center;
     justify-content: center;
+    margin: 20px 0;
 }
 
-h2 svg {
-    margin-right: 8px;
+.theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
 }
 
-.form-group {
-    margin-bottom: 20px;
+.theme-switch input {
+    display:none;
 }
 
-.input-group input,
-input[type="text"],
-input[type="time"],
-input[type="number"],
-button,
-select {
-    width: 100%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    box-sizing: border-box; /* Ensures padding does not affect overall width */
-}
-
-button {
-    background-color: #4CAF50; /* Green */
-    color: white;
-    font-size: 16px;
+.slider {
+    background-color: #ccc;
+    bottom: 0;
     cursor: pointer;
-    border: none;
-    transition: background-color 0.3s ease;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
 }
 
-button:hover {
-    background-color: #45a049;
+.slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
 }
 
-#result {
-    padding: 20px;
-    background-color: #f1f1f1;
-    border: none;
-    border-radius: 5px;
-    margin-top: 20px;
+input:checked + .slider {
+    background-color: #66bb6a;
 }
 
-fieldset {
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
+input:checked + .slider:before {
+    transform: translateX(26px);
 }
 
-legend {
-    padding: 0 10px;
-    color: #333;
+.slider.round {
+    border-radius: 34px;
 }
 
-label {
-    margin: 10px 0;
-    display: block;
-    color: #333;
+.slider.round:before {
+    border-radius: 50%;
 }
