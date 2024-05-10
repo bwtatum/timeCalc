@@ -12,7 +12,11 @@ function parseInputHours(input) {
         hours += parseInt(hoursMatch[1], 10);
     }
     if (minsMatch) {
-        hours += parseInt(minsMatch[1], 10) / 60;
+        let minutes = parseInt(minsMatch[1], 10);
+        if (minutes <= 22) {
+            minutes += 1; // Add an extra minute if minutes are 22 or less
+        }
+        hours += minutes / 60;
     }
     return hours;
 }
