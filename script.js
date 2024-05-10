@@ -12,11 +12,7 @@ function parseInputHours(input) {
         hours += parseInt(hoursMatch[1], 10);
     }
     if (minsMatch) {
-        let minutes = parseInt(minsMatch[1], 10);
-        if (minutes <= 22) {
-            minutes += 1; // Add an extra minute if minutes are 22 or less
-        }
-        hours += minutes / 60;
+        hours += parseInt(minsMatch[1], 10) / 60;
     }
     return hours;
 }
@@ -45,7 +41,7 @@ function calculateClockOutTime() {
     const [startHour, startMinute] = startTime.split(':').map(num => parseInt(num, 10));
     let endTime = new Date();
     endTime.setHours(startHour, startMinute, 0, 0);
-    endTime.setMinutes(endTime.getMinutes() + Math.floor(hoursLeft * 60));
+    endTime.setMinutes(endTime.getMinutes() + Math.round(hoursLeft * 60));
 
     // Adjust for lunch break
     if (addLunchBreak) {
