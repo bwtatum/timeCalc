@@ -50,12 +50,7 @@ function calculateClockOutTime() {
 
     // Adjust for buffer
     if (addBuffer) {
-        endTime.setMinutes(endTime.getMinutes() + 5);
-    }
-
-    // Ensure that time is within a 24-hour period
-    if (endTime.getDate() !== new Date().getDate()) {
-        endTime = new Date(endTime.getTime() % (24 * 60 * 60 * 1000));
+        endTime.setMinutes(endTime.getMinutes() - 5);
     }
 
     const endHourFormatted = endTime.getHours().toString().padStart(2, '0');
