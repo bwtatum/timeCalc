@@ -48,7 +48,7 @@ function calculateClockOutTime() {
     }
 
     if (addBuffer) {
-        endTime.setMinutes(endTime.getMinutes() - 5);
+        endTime.setMinutes(endTime.getMinutes() + 5); // Add 5-minute buffer
     }
 
     const endHourFormatted = endTime.getHours().toString().padStart(2, '0');
