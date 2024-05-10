@@ -41,14 +41,14 @@ function calculateClockOutTime() {
     const [startHour, startMinute] = startTime.split(':').map(num => parseInt(num, 10));
     let endTime = new Date();
     endTime.setHours(startHour, startMinute, 0, 0);
-    endTime.setMinutes(endTime.getMinutes() + (hoursLeft * 60));
+    endTime.setMinutes(endTime.getMinutes() + Math.floor(hoursLeft * 60));
 
     if (addLunchBreak) {
         endTime.setMinutes(endTime.getMinutes() + 30);
     }
 
     if (addBuffer) {
-        endTime.setMinutes(endTime.getMinutes() + 5); // Add 5-minute buffer
+        endTime.setMinutes(endTime.getMinutes() - 5);
     }
 
     const endHourFormatted = endTime.getHours().toString().padStart(2, '0');
