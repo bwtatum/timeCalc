@@ -6,41 +6,43 @@
     <title>Tatum's Time Calculator</title>
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
+<body data-theme="dark">
+    <div class="container">
+        <h2>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            Tatum's Time Calculator
+        </h2>
+        <div class="form-group">
+            <label for="hoursWorked">Hours Worked This Week:</label>
+            <input type="text" id="hoursWorked" placeholder="e.g., 55.5 or 55h 30m" required>
+        </div>
 
-<div class="container">
-    <h2><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> Tatum's Time Calculator</h2>
-    <div class="form-group">
-        <label for="hoursWorked">Hours Worked This Week:</label>
-        <input type="text" id="hoursWorked" placeholder="e.g., 55.5 or 55h 30m" required> 
-    </div>
-    
-    <div class="form-group">
-        <label for="startTime">Today's Start Time:</label>
-        <input type="time" id="startTime" value="01:15" required>
-    </div>
-    
-    <div class="form-group options">
-        <fieldset>
-            <legend>Options</legend>
-            <label><input type="checkbox" id="lunchBreak"> Add 30-minute lunch break (not counted in work hours)</label>
-            <label><input type="checkbox" id="addBuffer"> Add 5 minutes buffer</label>
-        </fieldset>
-    </div>
-    
-    <button onclick="calculateClockOutTime()">Calculate Clock Out Time</button>
-    <div id="result"></div>
-    
-    <!-- Dark Mode Toggle moved to the bottom -->
-    <div class="theme-switch-wrapper">
-        <label class="theme-switch" for="darkModeToggle">
-            <input type="checkbox" id="darkModeToggle">
-            <div class="slider round"></div>
-        </label>
-        <em>Enable Dark Mode!</em>
-    </div>
-</div>
+        <div class="form-group">
+            <label for="startTime">Today's Start Time:</label>
+            <input type="time" id="startTime" value="01:15" required>
+        </div>
 
-<script src="script.js"></script>
+        <div class="form-group options">
+            <fieldset>
+                <legend>Options</legend>
+                <label><input type="checkbox" id="lunchBreak"> Add 30-minute lunch break (not counted in work hours)</label>
+                <label><input type="checkbox" id="addBuffer"> Add 5 minutes buffer</label>
+            </fieldset>
+        </div>
+
+        <button onclick="calculateClockOutTime()">Calculate Clock Out Time</button>
+        <div id="result"></div>
+
+        <!-- Dark Mode Toggle moved to the bottom -->
+        <div class="theme-switch-wrapper">
+            <label class="theme-switch" for="darkModeToggle">
+                <input type="checkbox" id="darkModeToggle" checked>
+                <div class="slider round"></div>
+            </label>
+            <em>Enable Light Mode!</em>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
