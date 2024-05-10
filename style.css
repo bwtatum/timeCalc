@@ -77,6 +77,11 @@ input[type='checkbox'] {
     background-color: var(--options-background);
 }
 
+.options label {
+    display: block;
+    margin-bottom: 8px; /* Adds space between the labels */
+}
+
 legend {
     font-weight: bold;
     color: var(--foreground-color);
