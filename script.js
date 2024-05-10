@@ -62,8 +62,10 @@ function calculateClockOutTime() {
 // Dark Mode Toggle
 document.getElementById('darkModeToggle').addEventListener('change', function(event){
     if(event.target.checked) {
-        document.body.setAttribute('data-theme', 'dark');
-    } else {
         document.body.setAttribute('data-theme', 'light');
+        document.querySelector('.theme-switch-wrapper em').innerText = 'Enable Dark Mode!';
+    } else {
+        document.body.setAttribute('data-theme', 'dark');
+        document.querySelector('.theme-switch-wrapper em').innerText = 'Enable Light Mode!';
     }
 });
